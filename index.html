@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Simply Said | Simply Red tributeband</title>
-<meta name="description" content="Simply Said, een Simply Red tributeband. Video’s en agenda.">
+<meta name="description" content="Simply Said, een Simply Red tributeband. Agenda en video’s.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Jost:wght@300&display=swap" rel="stylesheet">
@@ -14,8 +14,8 @@
 
 <header class="site-header">
   <nav class="pill" aria-label="Hoofdmenu">
-    <a href="#videos">Video’s</a>
     <a href="#agenda">Agenda</a>
+    <a href="#videos">Video’s</a>
   </nav>
 </header>
 
@@ -33,9 +33,8 @@
     </div>
   </section>
 
-  <section id="videos" class="section">
-    <div class="section-title"><h2>Videos</h2></div>
-    <div id="video-grid" class="video-grid"></div>
+  <section id="video" class="main-video" aria-label="Video">
+    <div id="main-video"></div>
   </section>
 
   <section id="agenda" class="section">
@@ -47,6 +46,11 @@
       <span>Tijd</span>
     </div>
     <ul id="agenda-list" class="agenda-list"></ul>
+  </section>
+
+  <section id="videos" class="section">
+    <div class="section-title"><h2>Videos</h2></div>
+    <div id="video-grid" class="video-grid"></div>
   </section>
 </main>
 

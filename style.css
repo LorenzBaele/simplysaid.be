@@ -125,6 +125,18 @@ a { color: inherit; }
   object-fit: cover;
 }
 
+/* ---------- Main video (under the band photo) ---------- */
+
+.main-video {
+  padding: 0 64px;
+  scroll-margin-top: 16px;
+}
+
+.main-video .video {
+  max-width: 960px;
+  margin: 0 auto;
+}
+
 /* ---------- Sections ---------- */
 
 .section {
@@ -290,6 +302,7 @@ a { color: inherit; }
 
 @media (max-width: 720px) {
   .hero { padding: 32px 20px 40px; }
+  .main-video { padding: 0 20px; }
   .section { padding: 64px 20px; }
   .section-title { gap: 16px; margin-bottom: 32px; }
   .site-footer { padding: 24px 20px 32px; }

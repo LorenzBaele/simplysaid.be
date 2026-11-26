@@ -22,6 +22,11 @@ const PRIVATE_LABEL = 'Privé optreden';
 
 // Videos: fill in a youtubeId (the part after v= in the link) or a file path.
 // Entries with neither show the grey placeholder.
+
+// The big video right under the band photo.
+const MAIN_VIDEO = { title: '', caption: '', youtubeId: '', file: '' };
+
+// The grid in the Video's section.
 const VIDEOS = [
   { title: 'Holding Back the Years', caption: 'Studiosessie', youtubeId: '', file: '' },
   { title: 'Stars', caption: 'Studiosessie', youtubeId: '', file: '' },
@@ -99,43 +104,50 @@ function formatDate(date) {
 const PLAY_ICON = '<svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24"><path d="M8 4.5 L19 12 L8 19.5 Z" fill="#FFFFFF"></path></svg>';
 
 function renderVideos() {
+  const main = document.getElementById('main-video');
+  if (main) main.append(videoItem(MAIN_VIDEO));
+
   const grid = document.getElementById('video-grid');
-  if (!grid) return;
+  if (grid) VIDEOS.forEach((video) => grid.append(videoItem(video)));
+}
 
-  VIDEOS.forEach((video) => {
-    const item = el('div', 'video');
-    const frame = el('div', 'video-frame');
+function videoItem(video) {
+  const item = el('div', 'video');
+  const frame = el('div', 'video-frame');
 
-    if (video.youtubeId) {
-      const iframe = el('iframe');
-      iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.youtubeId);
-      iframe.title = video.title;
-      iframe.loading = 'lazy';
-      iframe.allow = 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
-      iframe.allowFullscreen = true;
-      frame.append(iframe);
-    } else if (video.file) {
-      const player = el('video');
-      player.src = video.file;
-      player.controls = true;
-      player.preload = 'metadata';
-      player.setAttribute('aria-label', video.title);
-      frame.append(player);
-    } else {
-      frame.append(el('span', 'video-label', 'Hier komt je video'));
-      const play = el('div', 'video-play');
-      play.setAttribute('aria-hidden', 'true');
-      play.innerHTML = PLAY_ICON;
-      frame.append(play);
-    }
+  if (video.youtubeId) {
+    const iframe = el('iframe');
+    iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(video.youtubeId);
+    iframe.title = video.title || 'Video';
+    iframe.loading = 'lazy';
+    iframe.allow = 'accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+    iframe.allowFullscreen = true;
+    frame.append(iframe);
+  } else if (video.file) {
+    const player = el('video');
+    player.src = video.file;
+    player.controls = true;
+    player.preload = 'metadata';
+    player.setAttribute('aria-label', video.title || 'Video');
+    frame.append(player);
+  } else {
+    frame.append(el('span', 'video-label', 'Hier komt je video'));
+    const play = el('div', 'video-play');
+    play.setAttribute('aria-hidden', 'true');
+    play.innerHTML = PLAY_ICON;
+    frame.append(play);
+  }
 
+  item.append(frame);
+
+  if (video.title || video.caption) {
     const text = el('div');
-    text.append(el('span', 'video-title', video.title));
+    if (video.title) text.append(el('span', 'video-title', video.title));
     if (video.caption) text.append(el('span', 'video-caption', video.caption));
+    item.append(text);
+  }
 
-    item.append(frame, text);
-    grid.append(item);
-  });
+  return item;
 }
 
 // ===================== AGENDA =====================
