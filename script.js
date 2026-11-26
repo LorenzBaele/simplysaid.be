@@ -1,19 +1,25 @@
 // ===================== SETTINGS =====================
 
-const BAND_NAME = 'Simply Said';
+// The sheet holds the gigs of all bands. Only rows whose "Band" cell equals
+// this label (not case sensitive) are shown. Label still TBD: keep it in sync
+// with what goes in the sheet.
+const BAND_LABEL = 'Simply Said';
 
-// Paste the "published to the web" CSV link of the Google Sheet here
-// (File > Share > Publish to web > choose the sheet > CSV).
-const SHEET_CSV_URL = '';
+// "Published to the web" CSV link of the shared agenda sheet.
+const SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vT6ql9eeunAAc-XCw5Gll8KzgT7UqEOuurBkcigpWr9mu80wfpu3tCT8HxdJNF_pJ3NhY4ikf2C7sfT/pub?gid=293892753&single=true&output=csv';
 
 // Header names in the first row of the sheet (not case sensitive).
 const COLUMNS = {
   band: 'Band',
-  date: 'Datum',
-  time: 'Tijd',
-  venue: 'Locatie',
-  city: 'Plaats',
+  date: 'Date',
+  time: 'Time',
+  venue: 'Venue',
+  city: 'Location',
+  private: 'Private',
 };
+
+// Shown instead of venue and place for gigs marked TRUE in the Private column.
+const PRIVATE_LABEL = 'Privé optreden';
 
 // Videos: fill in a youtubeId (the part after v= in the link) or a file path.
 // Entries with neither show the grey placeholder.
@@ -167,13 +173,16 @@ async function loadAgenda() {
     const cell = (row, key) => (col[key] === -1 ? '' : (row[col[key]] || '').trim());
 
     const gigs = rows
-      .filter((row) => cell(row, 'band').toLowerCase() === BAND_NAME.toLowerCase())
-      .map((row) => ({
-        date: parseDate(cell(row, 'date')),
-        time: cell(row, 'time'),
-        venue: cell(row, 'venue'),
-        city: cell(row, 'city'),
-      }))
+      .filter((row) => cell(row, 'band').toLowerCase() === BAND_LABEL.toLowerCase())
+      .map((row) => {
+        const isPrivate = cell(row, 'private').toUpperCase() === 'TRUE';
+        return {
+          date: parseDate(cell(row, 'date')),
+          time: cell(row, 'time'),
+          venue: isPrivate ? PRIVATE_LABEL : cell(row, 'venue'),
+          city: isPrivate ? '' : cell(row, 'city'),
+        };
+      })
       .filter((gig) => gig.date && gig.date >= today)
       .sort((a, b) => a.date - b.date || a.time.localeCompare(b.time));
 
