@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Simply Said | Simply Red tributeband</title>
+<meta name="description" content="Simply Said, een Simply Red tributeband. Video’s en agenda.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600&family=Jost:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="pill" aria-label="Hoofdmenu">
+    <a href="#videos">Video’s</a>
+    <a href="#agenda">Agenda</a>
+  </nav>
+</header>
+
+<main>
+  <section id="top" class="hero">
+    <div class="hero-text">
+      <h1>Simply Said</h1>
+      <p>Simply Red tributeband</p>
+    </div>
+    <div class="hero-photo">
+      <svg aria-hidden="true" width="44" height="44" viewBox="0 0 40 40" fill="none" stroke="#7A7A80" stroke-width="1.5"><rect x="4" y="7" width="32" height="26" rx="2"></rect><circle cx="14" cy="16" r="3"></circle><path d="M4 30 L15 21 L22 27 L29 20 L36 27"></path></svg>
+      <span>Bandfoto</span>
+      <!-- Put the band photo at assets/bandfoto.jpg. Until it exists, the grey placeholder above stays visible. -->
+      <img src="assets/bandfoto.jpg" alt="Simply Said" onerror="this.remove()">
+    </div>
+  </section>
+
+  <section id="videos" class="section">
+    <div class="section-title"><h2>Videos</h2></div>
+    <div id="video-grid" class="video-grid"></div>
+  </section>
+
+  <section id="agenda" class="section">
+    <div class="section-title"><h2>Agenda</h2></div>
+    <div class="agenda-head" aria-hidden="true">
+      <span>Datum</span>
+      <span>Locatie</span>
+      <span>Plaats</span>
+      <span>Tijd</span>
+    </div>
+    <ul id="agenda-list" class="agenda-list"></ul>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <span>© <span id="year">2026</span> Simply Said</span>
+  <span>Een Simply Red tributeband</span>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
