@@ -253,7 +253,6 @@ a { color: inherit; }
   margin: 0;
   padding: 0;
   list-style: none;
-  border-bottom: 1px solid var(--hairline);
 }
 
 .agenda-row {
