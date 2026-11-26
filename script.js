@@ -1,8 +1,7 @@
 // ===================== SETTINGS =====================
 
 // The sheet holds the gigs of all bands. Only rows whose "Band" cell equals
-// this label (not case sensitive) are shown. Label still TBD: keep it in sync
-// with what goes in the sheet.
+// this label (not case sensitive) are shown.
 const BAND_LABEL = 'Simply Said';
 
 // "Published to the web" CSV link of the shared agenda sheet.
